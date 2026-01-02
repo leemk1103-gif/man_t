@@ -5,129 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>수학강사 만티 | MANTI MATH</title>
     <style>
-        /* 1. 기본 세팅 (Reset & Variables) */
+        /* [디자인 테마: 프리미엄 다크 & 골드] */
         :root {
-            --primary-color: #0F172A; /* 짙은 네이비 (신뢰감) */
-            --accent-color: #2563EB; /* 쨍한 블루 (전문성) */
-            --text-color: #334155;
-            --bg-light: #F8FAFC;
-            --white: #FFFFFF;
+            --bg-color: #121212;       /* 아주 짙은 블랙 */
+            --card-bg: #1E1E1E;        /* 카드 배경 */
+            --text-main: #E0E0E0;      /* 메인 텍스트 (화이트) */
+            --text-sub: #A0A0A0;       /* 서브 텍스트 (그레이) */
+            --accent: #D4AF37;         /* 포인트 컬러 (골드) */
+            --accent-hover: #F1C40F;   /* 버튼 호버시 (밝은 골드) */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
         
-        body { line-height: 1.6; color: var(--text-color); background-color: var(--bg-light); }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* 2. 네비게이션 */
+        /* 네비게이션 */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 5%; background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky; top: 0; z-index: 1000;
+            padding: 1.2rem 5%; background: rgba(18, 18, 18, 0.95); 
+            border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(10px);
         }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); }
+        .logo { font-size: 1.4rem; font-weight: 900; color: var(--accent); letter-spacing: 1px; }
         .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { font-weight: 600; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--accent-color); }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-sub); transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* 3. 히어로 섹션 (메인) */
+        /* 히어로 섹션 */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #1e293b 100%);
-            color: var(--white); padding: 5rem 5%; text-align: center;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 8rem 5%; text-align: center;
+            background: radial-gradient(circle at center, #2a2a2a 0%, #121212 100%);
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; max-width: 600px; }
-        .cta-button {
-            background-color: var(--accent-color); color: var(--white);
-            padding: 1rem 2.5rem; border-radius: 50px; font-weight: bold;
-            transition: transform 0.2s, background-color 0.3s;
-        }
-        .cta-button:hover { transform: translateY(-3px); background-color: #1d4ed8; }
-
-        /* 4. 섹션 공통 스타일 */
-        section { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
-        h2 { font-size: 2rem; color: var(--primary-color); margin-bottom: 2rem; text-align: center; font-weight: 700; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
+        .hero h1 span { color: var(--accent); } /* 강조색 */
+        .hero p { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 3rem; }
         
-        /* 5. 커리큘럼 (카드 디자인) */
-        .curriculum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .cta-button {
+            display: inline-block;
+            background: transparent; color: var(--accent);
+            padding: 1rem 3rem; border: 2px solid var(--accent);
+            font-weight: 700; transition: 0.3s;
+        }
+        .cta-button:hover { background: var(--accent); color: #000; transform: translateY(-3px); }
+
+        /* 섹션 공통 */
+        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 2rem; margin-bottom: 3rem; text-align: center; font-weight: 700; color: var(--text-main); }
+        h2::after { content: ''; display: block; width: 40px; height: 3px; background: var(--accent); margin: 15px auto 0; }
+
+        /* 커리큘럼 카드 */
+        .curriculum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
         .card {
-            background: var(--white); padding: 2rem; border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border-top: 5px solid var(--accent-color);
-            transition: transform 0.3s;
+            background: var(--card-bg); padding: 2.5rem; border: 1px solid #333;
+            transition: 0.4s; position: relative; overflow: hidden;
         }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { margin-bottom: 1rem; color: var(--primary-color); }
-        .step-badge { 
-            display: inline-block; background: #DBEAFE; color: #1E40AF; 
-            padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;
-        }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .step { font-size: 0.8rem; color: var(--accent); font-weight: bold; margin-bottom: 1rem; display: block; letter-spacing: 2px; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--text-main); }
+        .card p { font-size: 0.95rem; color: var(--text-sub); }
 
-        /* 6. 강의 영상 (반응형 비디오) */
+        /* 비디오 */
         .video-container {
-            position: relative; padding-bottom: 56.25%; /* 16:9 비율 */
-            height: 0; overflow: hidden; border-radius: 12px; background: #000; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative; padding-bottom: 56.25%; height: 0; 
+            border: 1px solid #333; background: #000;
         }
-        .video-container video, .video-container iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* 문의하기 */
+        .contact-box {
+            background: var(--card-bg); border: 1px solid #333;
+            padding: 4rem 2rem; text-align: center;
         }
-        .video-desc { text-align: center; margin-top: 1rem; color: #64748b; }
+        .contact-row { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
+        .contact-item span { display: block; font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.5rem; }
+        .contact-item a, .contact-item div { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
 
-        /* 7. 문의하기 (푸터) */
-        .contact-section { background: var(--white); text-align: center; border-radius: 12px; padding: 3rem; margin-top: 2rem; }
-        .contact-info { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
-        .contact-item { display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; font-weight: 600; }
-        .icon { font-size: 1.5rem; }
-
-        /* 모바일 대응 */
+        /* 모바일 */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-links { display: none; } /* 모바일 메뉴 생략 (심플 버전) */
-            .contact-info { flex-direction: column; gap: 1rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .contact-row { gap: 2rem; flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">MANTI MATH</div>
+        <div class="logo">MANTI</div>
         <div class="nav-links">
-            <a href="#about">소개</a>
-            <a href="#curriculum">커리큘럼</a>
-            <a href="#video">강의영상</a>
-            <a href="#contact">문의하기</a>
+            <a href="#curriculum">CURRICULUM</a>
+            <a href="#video">LECTURE</a>
+            <a href="#contact">CONTACT</a>
         </div>
     </nav>
 
     <header class="hero">
-        <h1>수학의 정점, 오르라!<br>강사 만티(Manti)입니다</h1>
-        <p>기초 개념부터 킬러 문항까지, 성적 상승의 확실한 로드맵을 제시합니다.</p>
-        <a href="#contact" class="cta-button">상담 문의하기</a>
+        <h1>MATH IS <br><span>PERFECTION</span></h1>
+        <p>본질을 꿰뚫는 통찰력, 만티 수학입니다.<br>압도적인 실력 차이를 경험하십시오.</p>
+        <a href="#contact" class="cta-button">수강 문의하기</a>
     </header>
 
     <section id="curriculum">
-        <h2>CURRICULUM</h2>
+        <h2>CURRICULUM FLOW</h2>
         <div class="curriculum-grid">
             <div class="card">
-                <span class="step-badge">STEP 01</span>
-                <h3>개념 완성 (Concept)</h3>
-                <p>수학의 뼈대를 세우는 과정. 단순 암기가 아닌 원리를 통한 완벽한 개념 이해를 목표로 합니다.</p>
+                <span class="step">STEP 01</span>
+                <h3>Concept (개념)</h3>
+                <p>단순 암기가 아닌, 공식 유도 과정을 통한 완벽한 논리적 이해.</p>
             </div>
             <div class="card">
-                <span class="step-badge">STEP 02</span>
-                <h3>유형 격파 (Pattern)</h3>
-                <p>기출 문제 분석을 통해 빈출 유형을 정리하고 문제 해결 알고리즘을 체화합니다.</p>
+                <span class="step">STEP 02</span>
+                <h3>Pattern (유형)</h3>
+                <p>평가원 기출 알고리즘 분석 및 문제 풀이의 최적화.</p>
             </div>
             <div class="card">
-                <span class="step-badge">STEP 03</span>
-                <h3>심화 & 킬러 (Advanced)</h3>
-                <p>변별력을 가르는 고난도 문항 정복. 사고의 확장을 통해 1등급으로 도약합니다.</p>
+                <span class="step">STEP 03</span>
+                <h3>Killer (심화)</h3>
+                <p>변별력을 가르는 고난도 문항 정복과 사고력의 확장.</p>
             </div>
             <div class="card">
-                <span class="step-badge">STEP 04</span>
-                <h3>파이널 실전 (Final)</h3>
-                <p>실전 모의고사를 통한 시간 관리 및 약점 보완. 수능/내신 최적화 최종 점검.</p>
+                <span class="step">STEP 04</span>
+                <h3>Final (실전)</h3>
+                <p>실전 모의고사를 통한 시간 안배 훈련 및 약점 최종 점검.</p>
             </div>
         </div>
     </section>
@@ -135,34 +136,32 @@
     <section id="video">
         <h2>LECTURE PREVIEW</h2>
         <div class="video-container">
-            <video controls poster="https://via.placeholder.com/800x450?text=Manti+Math+Class">
+            <video controls poster="https://via.placeholder.com/800x450/111/D4AF37?text=Manti+Math">
                 <source src="lecture_sample.mp4" type="video/mp4">
-                브라우저가 동영상을 지원하지 않습니다.
             </video>
         </div>
-        <p class="video-desc">▲ 만티 선생님의 핵심 문제 풀이 시연 영상</p>
+        <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">▲ 만티 선생님 강의 하이라이트</p>
     </section>
 
     <section id="contact">
-        <div class="contact-section">
-            <h2>CONTACT ME</h2>
-            <p>수업에 대해 궁금한 점이 있으신가요? 언제든 편하게 문의주세요.</p>
-            
-            <div class="contact-info">
+        <div class="contact-box">
+            <h2>CONTACT</h2>
+            <p style="color: #888;">상담이 필요하신가요? 아래 채널로 연락주십시오.</p>
+            <div class="contact-row">
                 <div class="contact-item">
-                    <span class="icon">📞</span>
-                    <a href="tel:053-290-3821">053-290-3821</a>
+                    <span>PHONE</span>
+                    <a href="tel:053-290-3821">053.290.3821</a>
                 </div>
                 <div class="contact-item">
-                    <span class="icon">💬</span>
-                    <span>KakaoTalk : orr_man_t</span>
+                    <span>KAKAO TALK</span>
+                    <div>orr_man_t</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 2rem; color: #888; font-size: 0.9rem;">
-        &copy; 2025 Math Instructor Manti. All rights reserved.
+    <footer style="text-align: center; padding: 2rem; font-size: 0.8rem; color: #444;">
+        &copy; 2025 Manti Math. All rights reserved.
     </footer>
 
 </body>
