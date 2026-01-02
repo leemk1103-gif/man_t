@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>수학강사 만티 | MANTI MATH</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* [디자인 테마: 프리미엄 다크 & 골드] */
+        /* [디자인 테마: 프리미엄 다크 & 골드 + 챗봇] */
         :root {
-            --bg-color: #121212;       /* 아주 짙은 블랙 */
+            --bg-color: #121212;       /* 배경 */
             --card-bg: #1E1E1E;        /* 카드 배경 */
-            --text-main: #E0E0E0;      /* 메인 텍스트 (화이트) */
-            --text-sub: #A0A0A0;       /* 서브 텍스트 (그레이) */
-            --accent: #D4AF37;         /* 포인트 컬러 (골드) */
-            --accent-hover: #F1C40F;   /* 버튼 호버시 (밝은 골드) */
+            --text-main: #E0E0E0;      /* 메인 텍스트 */
+            --text-sub: #A0A0A0;       /* 서브 텍스트 */
+            --accent: #D4AF37;         /* 골드 포인트 */
+            --kakao-yellow: #FEE500;   /* 카카오톡 컬러 */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
-        
+        html { scroll-behavior: smooth; }
         body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; }
         a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-
+        
         /* 네비게이션 */
         nav {
             display: flex; justify-content: space-between; align-items: center;
@@ -28,83 +29,111 @@
             border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000;
             backdrop-filter: blur(10px);
         }
-        .logo { font-size: 1.4rem; font-weight: 900; color: var(--accent); letter-spacing: 1px; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--accent); letter-spacing: 1px; }
         .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-sub); transition: 0.3s; }
+        .nav-links a { font-size: 1rem; font-weight: 500; color: var(--text-sub); transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* 히어로 섹션 */
+        /* 히어로 섹션 (캐릭터 추가) */
         .hero {
-            padding: 8rem 5%; text-align: center;
-            background: radial-gradient(circle at center, #2a2a2a 0%, #121212 100%);
+            padding: 6rem 5%; display: flex; align-items: center; justify-content: center; gap: 4rem;
+            background: radial-gradient(circle at top right, #2a2a2a 0%, #121212 70%);
+            min-height: 80vh; /* 화면 꽉 차게 */
         }
+        .hero-text { flex: 1; max-width: 600px; }
         .hero h1 { font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
-        .hero h1 span { color: var(--accent); } /* 강조색 */
+        .hero h1 span { color: var(--accent); }
         .hero p { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 3rem; }
-        
-        .cta-button {
-            display: inline-block;
-            background: transparent; color: var(--accent);
-            padding: 1rem 3rem; border: 2px solid var(--accent);
-            font-weight: 700; transition: 0.3s;
+        .hero-image { flex: 1; max-width: 450px; display: flex; justify-content: center; }
+        .hero-image img { 
+            width: 100%; height: auto; border-radius: 20px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 2px solid #333;
+            transition: transform 0.3s;
         }
-        .cta-button:hover { background: var(--accent); color: #000; transform: translateY(-3px); }
+        .hero-image img:hover { transform: scale(1.02); border-color: var(--accent); }
 
+        /* 버튼 공통 */
+        .btn {
+            display: inline-block; padding: 1rem 2.5rem; border-radius: 50px;
+            font-weight: 700; transition: 0.3s; cursor: pointer;
+        }
+        .btn-gold { background: var(--accent); color: #000; border: 2px solid var(--accent); }
+        .btn-gold:hover { background: transparent; color: var(--accent); transform: translateY(-3px); }
+        
         /* 섹션 공통 */
-        section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
-        h2 { font-size: 2rem; margin-bottom: 3rem; text-align: center; font-weight: 700; color: var(--text-main); }
-        h2::after { content: ''; display: block; width: 40px; height: 3px; background: var(--accent); margin: 15px auto 0; }
+        section { padding: 7rem 5%; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 2.2rem; margin-bottom: 3rem; text-align: center; font-weight: 700; color: var(--text-main); }
+        h2::after { content: ''; display: block; width: 50px; height: 3px; background: var(--accent); margin: 15px auto 0; }
 
         /* 커리큘럼 카드 */
-        .curriculum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+        .curriculum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
         .card {
-            background: var(--card-bg); padding: 2.5rem; border: 1px solid #333;
+            background: var(--card-bg); padding: 2.5rem; border-radius: 15px; border: 1px solid #333;
             transition: 0.4s; position: relative; overflow: hidden;
         }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .step { font-size: 0.8rem; color: var(--accent); font-weight: bold; margin-bottom: 1rem; display: block; letter-spacing: 2px; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--text-main); }
-        .card p { font-size: 0.95rem; color: var(--text-sub); }
+        .card:hover { border-color: var(--accent); transform: translateY(-7px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .step { font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 1rem; display: block; letter-spacing: 2px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main); }
+        .card p { font-size: 1rem; color: var(--text-sub); }
 
         /* 비디오 */
         .video-container {
-            position: relative; padding-bottom: 56.25%; height: 0; 
-            border: 1px solid #333; background: #000;
+            position: relative; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden;
+            border: 1px solid #333; background: #000; box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
         .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* 문의하기 */
-        .contact-box {
-            background: var(--card-bg); border: 1px solid #333;
-            padding: 4rem 2rem; text-align: center;
-        }
-        .contact-row { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
-        .contact-item span { display: block; font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.5rem; }
-        .contact-item a, .contact-item div { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+        /* 문의하기 & 푸터 */
+        .contact-section { text-align: center; padding-bottom: 4rem; }
+        .contact-info { font-size: 1.3rem; margin-bottom: 2rem; }
+        .contact-info div { margin: 1rem 0; }
+        .contact-info i { color: var(--accent); margin-right: 10px; }
 
-        /* 모바일 */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
+        /* 챗봇 상담 버튼 (고정형) */
+        .chatbot-btn {
+            position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+            display: flex; align-items: center; gap: 10px;
+            background: var(--kakao-yellow); color: #3C1E1E;
+            padding: 12px 25px; border-radius: 50px;
+            font-weight: 700; font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: 0.3s; animation: float 3s ease-in-out infinite;
+        }
+        .chatbot-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .chatbot-icon { font-size: 1.5rem; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        /* 모바일 대응 */
+        @media (max-width: 968px) {
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 4rem; gap: 2rem; }
+            .hero-text { margin: 0 auto; }
+            .hero h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
-            .contact-row { gap: 2rem; flex-direction: column; }
+            .chatbot-btn span { display: none; } /* 모바일에선 아이콘만 */
+            .chatbot-btn { padding: 15px; border-radius: 50%; bottom: 20px; right: 20px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">MANTI</div>
+        <div class="logo">MANTI MATH</div>
         <div class="nav-links">
-            <a href="#curriculum">CURRICULUM</a>
-            <a href="#video">LECTURE</a>
-            <a href="#contact">CONTACT</a>
+            <a href="#curriculum">커리큘럼</a>
+            <a href="#video">강의영상</a>
+            <a href="#contact">문의하기</a>
         </div>
     </nav>
 
     <header class="hero">
-        <h1>MATH IS <br><span>PERFECTION</span></h1>
-        <p>본질을 꿰뚫는 통찰력, 만티 수학입니다.<br>압도적인 실력 차이를 경험하십시오.</p>
-        <a href="#contact" class="cta-button">수강 문의하기</a>
+        <div class="hero-text">
+            <h1>수학의 본질을 꿰뚫다<br><span>만티(Manti) 입니다.</span></h1>
+            <p>압도적인 실력 차이, 결과로 증명합니다.<br>가장 확실한 1등급 로드맵을 제시합니다.</p>
+            <a href="#contact" class="btn btn-gold">수강 상담 신청</a>
+        </div>
+        <div class="hero-image">
+            <img src="image_4.png" alt="수학강사 만티 프로필">
+        </div>
     </header>
 
     <section id="curriculum">
@@ -112,23 +141,23 @@
         <div class="curriculum-grid">
             <div class="card">
                 <span class="step">STEP 01</span>
-                <h3>Concept (개념)</h3>
-                <p>단순 암기가 아닌, 공식 유도 과정을 통한 완벽한 논리적 이해.</p>
+                <h3>Concept (개념 완성)</h3>
+                <p>단순 암기 NO. 공식 유도 과정을 통한 완벽한 논리적 이해와 체화.</p>
             </div>
             <div class="card">
                 <span class="step">STEP 02</span>
-                <h3>Pattern (유형)</h3>
-                <p>평가원 기출 알고리즘 분석 및 문제 풀이의 최적화.</p>
+                <h3>Pattern (유형 격파)</h3>
+                <p>평가원 기출 알고리즘 분석. 빈출 유형 정리 및 풀이 최적화.</p>
             </div>
             <div class="card">
                 <span class="step">STEP 03</span>
-                <h3>Killer (심화)</h3>
-                <p>변별력을 가르는 고난도 문항 정복과 사고력의 확장.</p>
+                <h3>Killer (심화 정복)</h3>
+                <p>변별력을 가르는 고난도 문항 해결 능력 배양. 사고력의 확장.</p>
             </div>
             <div class="card">
                 <span class="step">STEP 04</span>
-                <h3>Final (실전)</h3>
-                <p>실전 모의고사를 통한 시간 안배 훈련 및 약점 최종 점검.</p>
+                <h3>Final (실전 대비)</h3>
+                <p>실전 모의고사를 통한 시간 관리 훈련 및 약점 최종 보완.</p>
             </div>
         </div>
     </section>
@@ -136,33 +165,30 @@
     <section id="video">
         <h2>LECTURE PREVIEW</h2>
         <div class="video-container">
-            <video controls poster="https://via.placeholder.com/800x450/111/D4AF37?text=Manti+Math">
+            <video controls poster="https://via.placeholder.com/800x450/111/D4AF37?text=Manti+Math+Class">
                 <source src="lecture_sample.mp4" type="video/mp4">
+                브라우저가 동영상을 지원하지 않습니다.
             </video>
         </div>
-        <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">▲ 만티 선생님 강의 하이라이트</p>
+        <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">▲ 만티 선생님 핵심 강의 미리보기</p>
     </section>
 
-    <section id="contact">
-        <div class="contact-box">
-            <h2>CONTACT</h2>
-            <p style="color: #888;">상담이 필요하신가요? 아래 채널로 연락주십시오.</p>
-            <div class="contact-row">
-                <div class="contact-item">
-                    <span>PHONE</span>
-                    <a href="tel:053-290-3821">053.290.3821</a>
-                </div>
-                <div class="contact-item">
-                    <span>KAKAO TALK</span>
-                    <div>orr_man_t</div>
-                </div>
-            </div>
+    <section id="contact" class="contact-section">
+        <h2>CONTACT ME</h2>
+        <div class="contact-info">
+            <div><i class="fas fa-phone-alt"></i> <a href="tel:053-290-3821">053. 290. 3821</a></div>
+            <div><i class="fas fa-comment"></i> KakaoTalk : orr_man_t</div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 2rem; font-size: 0.8rem; color: #444;">
-        &copy; 2025 Manti Math. All rights reserved.
+    <footer style="text-align: center; padding: 2rem; font-size: 0.8rem; color: #444; border-top: 1px solid #222;">
+        &copy; 2026 Manti Math. All rights reserved. | Designed by Silicon Valley Engineer
     </footer>
+
+    <a href="https://open.kakao.com/o/gHerwt9h" target="_blank" class="chatbot-btn">
+        <i class="fas fa-comments chatbot-icon"></i>
+        <span>카톡 실시간 상담</span>
+    </a>
 
 </body>
 </html>
